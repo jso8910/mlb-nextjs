@@ -1,0 +1,67 @@
+@import 'styles/Variables.scss';
+
+.heading {
+  text-align: center;
+}
+
+.card {
+  background: $card;
+  padding: $padding;
+  margin: $margin;
+  margin-left: 0px;
+  border-radius: $borderRadius;
+  box-shadow: 0px 0px 10px 2px black;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.games {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  flex: auto;
+  overflow-x: auto;
+  padding: 5px;
+}
+
+.score > tr > td {
+  padding-right: 20px;
+}
+
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.loader div {
+  position: fixed;
+	top: calc(50% - 32px);
+	left: calc(50% - 32px);
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  display: block;
+  width: 64px;
+  height: 64px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: loader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.loader div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.loader div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.loader div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
