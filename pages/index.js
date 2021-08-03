@@ -7,11 +7,12 @@ export default function Home() {
   const { data, error } = useSWR('test', getData)
   let dataElement;
   if (error) {
+    console.log(error)
     dataElement = <p>Error</p>
   } else if (!data) {
-    dataElement = <p>Loading...</p>
+    // dataElement = <p>Loading...</p>
+    dataElement = <div className={styles.loader}><div></div><div></div><div></div><div></div></div>
   } else if (data) {
-    // dataElement = <pre>{JSON.stringify(data[0], null, 2)}</pre>
     dataElement = (
       <div className={styles.games}>
         {data.map(game => {
@@ -26,7 +27,8 @@ export default function Home() {
           let balls = game.liveData.linescore.balls
           let strikes = game.liveData.linescore.strikes
           let outs = game.liveData.linescore.outs
-
+          
+          // If the game is currently ongoing then have current game stuff
           if (game.gameData.status.statusCode.toLowerCase() !== 'f' && game.gameData.status.statusCode.toLowerCase() !== 's' && game.gameData.status.statusCode.toLowerCase() !== 'p') {
             gameInfo = (
               <div>
@@ -67,36 +69,12 @@ export default function Home() {
               </tr>
             </table>
             {gameInfo}
-            {/* <p>Balls: {game.liveData.linescore.balls}</p>
-            <div>
-              <svg height="22" width="22">
-                <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={balls >= 1 && balls !== 4 ? 'yellow' : 'transparent'} />
-              </svg>
-              <svg height="22" width="22">
-                <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={balls >= 2 && balls !== 4 ? 'yellow' : 'transparent'} />
-              </svg>
-              <svg height="22" width="22">
-                <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={balls >= 3 && balls !== 4 ? 'yellow' : 'transparent'} />
-              </svg>
-            </div>
-            <p>Strikes: {game.liveData.linescore.strikes}</p>
-            <div>
-              <svg height="22" width="22">
-                <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={strikes >= 1 && strikes !== 3 ? 'red' : 'transparent'} />
-              </svg>
-              <svg height="22" width="22">
-                <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={strikes >= 2 && strikes !== 3 ? 'red' : 'transparent'} />
-              </svg>
-            </div>
-            <p>Outs: {game.liveData.linescore.outs}</p> */}
-            {/* { runners.length ? <p>Runners on: {runners}</p> : <p>No runners on</p> } */}
           </li>
       )}})}
       </div>
     )
   }
   return (
-    // <div className={styles.container}>
     <div>
       <Head>
         <title>Latest MLB scores</title>
@@ -114,7 +92,7 @@ export default function Home() {
 
 async function getData() {
   let data;
-  await fetch(getEndpoint('schedule') + new URLSearchParams({ sportId: 1, date: '2021-08-01' })).then(
+  await fetch(getEndpoint('schedule') + new URLSearchParams({ sportId: 1 })).then(
     res => res.json()
   ).then(
     json => data = json
@@ -125,16 +103,9 @@ async function getData() {
     todayGamePks.push(game.gamePk)
   })
 
-  let games = []
-  for (const gamePk of todayGamePks) {
-    let gameData;
-    await fetch(getEndpoint('game', { gamePk, gamePk })).then(
-      res => res.json()
-    ).then(
-      json => gameData = json
-    )
-    games.push(gameData)
-  }
+  let games = await Promise.all(todayGamePks.map(gamePk => fetch(getEndpoint('game', { gamePk: gamePk })))).then(
+    responses => Promise.all(responses.map(async (res) => await res.json()))
+  )
 
   return games
 }
