@@ -15,6 +15,26 @@
   white-space: nowrap;
 }
 
+.cardLight {
+  background: $cardLight;
+  padding: $padding;
+  margin: $margin;
+  border-radius: $borderRadius;
+  box-shadow: 0px 0px 10px 2px black;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cardLight:hover {
+  background: lighten($cardLight, 10%)
+}
+
+.pitches {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
 .games {
   display: flex;
   flex-flow: row;
@@ -64,4 +84,56 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.logocontainer {
+  background: #444444;
+  border-radius: 20%;
+  padding: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 5px 1px black;
+  display: flex;
+  align-items: center;
+}
+
+.table {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.playByPlayPlays {
+  display: inline-flex;
+  flex-direction: column;
+  overflow: auto;
+  background: $card;
+  border-radius: $borderRadius;
+  padding: $padding;
+  height: calc(100vh - 40px);
+  margin: 10px;
+  width: 20vw;
+  min-width: 300px;;
+  overflow-y: auto;
+}
+
+.boxscore {
+  display: inline-flex;
+  flex-direction: column;
+  overflow: auto;
+  background: $card;
+  border-radius: $borderRadius;
+  padding: $padding;
+  height: calc(100vh - 40px);
+  margin: 10px;
+  width: 20vw;
+  min-width: 300px;;
+  overflow-y: auto;
+  float: right;
+  position: absolute;
+  right: 0;
+}
+
+.liveGameContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

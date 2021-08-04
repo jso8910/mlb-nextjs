@@ -5,4 +5,12 @@ html, body {
   color: $color;
   font-family: sans-serif;
   color-scheme: dark;
+  margin: 0px;
+  padding: 0px;
+}
+
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
 }
