@@ -52,27 +52,28 @@ async function getData() {
   let games = await Promise.all(todayGamePks.map(gamePk => fetch(getEndpoint('game', { gamePk: gamePk })))).then(
     responses => Promise.all(responses.map(async (res) => await res.json()))
   )
+  console.log(games)
 
   // games.push(games[Math.floor(Math.random() * choices.length)])
 
   return games.sort((a, b) => {
     switch ((a.gameData.status.statusCode, b.gameData.status.statusCode)) {
       case ('F', 'S'):
-        return -1
+        return 1
       case ('S', 'F'):
-        return 1
+        return -1
       case ('F', 'PW'):
-        return -1
+        return 1
       case ('PW', 'F'):
-        return 1
+        return -1
       case ('P', 'F'):
-        return 1
+        return -1
       case ('F', 'P'):
-        return -1
-      case ('S', 'P'):
         return 1
-      case ('P', 'S'):
+      case ('S', 'P'):
         return -1
+      case ('P', 'S'):
+        return 1
     }
     return 0
   })
