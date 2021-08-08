@@ -9,12 +9,16 @@ export default function GamePage ({ params }) {
   const { gamePk } = params
   const { data, error } = useSWR([gamePk], getPlayByPlay, { refreshInterval: 100 })
   let dataElement;
+  let title;
   if (error) {
+    title = 'Live MLB Game'
     console.log(error)
     dataElement = <p>Error</p>
   } else if (!data) {
+    title = 'Live MLB Game'
     dataElement = <div className={styles.loader}><div></div><div></div><div></div><div></div></div>
   } else if (data) {
+    title = `${data[1].gameData.teams.away.name} at ${data[1].gameData.teams.home.name} — Live MLB Game`
     dataElement = (
       <div className={styles.liveGameContainer}>
         <div className={styles.playByPlayPlays}>
@@ -29,7 +33,7 @@ export default function GamePage ({ params }) {
   return (
     <div>
       <Head>
-        <title>Live MLB Game</title>
+        <title>{title}</title>
         <meta name="description" content="MLB website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
