@@ -52,9 +52,6 @@ async function getData() {
   let games = await Promise.all(todayGamePks.map(gamePk => fetch(getEndpoint('game', { gamePk: gamePk })))).then(
     responses => Promise.all(responses.map(async (res) => await res.json()))
   )
-  console.log(games)
-
-  // games.push(games[Math.floor(Math.random() * choices.length)])
 
   return games.sort((a, b) => {
     switch ((a.gameData.status.statusCode, b.gameData.status.statusCode)) {

@@ -181,8 +181,7 @@
 }
 
 .centerPaddingTable {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 5px;
   text-align: center;
 }
 
@@ -210,4 +209,14 @@
 
 .linescore {
   border: 1px solid white;
+}
+
+.division {
+  padding: 5px;
+  padding-right: 0px;
+}
+
+.league {
+  padding-left: 10px;
+  display: inline-block;
 }

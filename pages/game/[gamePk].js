@@ -21,12 +21,21 @@ export default function GamePage ({ params }) {
     title = `${data[1].gameData.teams.away.name} at ${data[1].gameData.teams.home.name} — Live MLB Game`
     dataElement = (
       <div className={styles.liveGameContainer}>
+        {data[1].liveData.plays.currentPlay ? (<>
         <div className={styles.playByPlayPlays}>
           <Plays game={data[1]} />
         </div>
         <div className={styles.scores}>
           <Boxscore game={data[1]} />
-        </div>
+        </div></>) : (
+          <div className={styles.scores}>
+            <h2>{data[1].gameData.teams.away.name} at {data[1].gameData.teams.home.name}</h2>
+            <p>Game Status: {data[1].gameData.status.detailedState}</p>
+            <strong>{data[1].gameData.teams.away.name} pitcher: {data[1].gameData.probablePitchers.away.fullName}</strong>
+            <strong>{data[1].gameData.teams.home.name} pitcher: {data[1].gameData.probablePitchers.home.fullName}</strong>
+          </div>
+        )
+        }
       </div>
     )
   }
