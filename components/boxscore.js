@@ -100,8 +100,6 @@ export default function Boxscore({ game }) {
         </thead>
         <tbody>
           {boxscore.teams[team].batters.sort((a, b) => {
-            console.log(a, b)
-            console.log(boxscore.teams[team].players)
             let playerA = boxscore.teams[team].players[`ID${a}`]
             let playerB = boxscore.teams[team].players[`ID${b}`]
 

@@ -5,6 +5,16 @@ function convertDateStringToTimestamp(date) {
 }
 
 export default function Plays({ game, setTimestamp }) {
+  const toOrdinalSuffix = num => {
+    const int = parseInt(num),
+      digits = [int % 10, int % 100],
+      ordinals = ['st', 'nd', 'rd', 'th'],
+      oPattern = [1, 2, 3, 4],
+      tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+    return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
+      ? int + ordinals[digits[0] - 1]
+      : int + ordinals[3];
+  };
   game = game.liveData.plays
   let balls, strikes, outs;
   let plays = [game.currentPlay];
@@ -32,7 +42,7 @@ export default function Plays({ game, setTimestamp }) {
       return (
         <div onClick={collapseListener} className={styles.cardLight} key={`play_${index}`}>
         <div>
-          <p>{play.result.description}</p>
+          <p>{play.about.halfInning.charAt(0).toUpperCase() + play.about.halfInning.slice(1)} of {toOrdinalSuffix(play.about.inning)}{play.result.description && ` — ${play.result.description}`}</p>
           <div>
             <svg height="22" width="22">
               <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={balls >= 1 && balls !== 4 ? 'yellow' : 'transparent'} />
