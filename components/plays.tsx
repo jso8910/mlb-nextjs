@@ -1,11 +1,12 @@
 import styles from '../styles/Home.module.scss'
+import FeedInterface, { AllPlayPlayEvent } from '../interfaces/feed';
 
-function convertDateStringToTimestamp(date) {
+function convertDateStringToTimestamp(date: string) {
   return date.replaceAll('-', '').replaceAll('T', '_').replaceAll(':', '').split('.')[0]
 }
 
-export default function Plays({ game, setTimestamp }) {
-  const toOrdinalSuffix = num => {
+export default function Plays({ game }: { game: FeedInterface }) {
+  const toOrdinalSuffix = (num: string) => {
     const int = parseInt(num),
       digits = [int % 10, int % 100],
       ordinals = ['st', 'nd', 'rd', 'th'],
@@ -16,12 +17,12 @@ export default function Plays({ game, setTimestamp }) {
       : int + ordinals[3];
   };
   let gameOld = game;
-  game = game.liveData.plays
-  let balls, strikes, outs;
-  let plays = [game.currentPlay];
-  plays.push(...game.allPlays)
+  let gamePlayByPlay = game.liveData.plays
+  let balls: number, strikes: number, outs: number;
+  let plays: Array<any> = [gamePlayByPlay.currentPlay];
+  plays.push(...gamePlayByPlay.allPlays)
   let runnerDict = gameOld.liveData.linescore.offense
-  let runners = []
+  let runners: Array<String> = []
   for (const base of ["first", "second", "third"]) {
     if (base in runnerDict) {
       runners.push(base)
@@ -31,23 +32,23 @@ export default function Plays({ game, setTimestamp }) {
   if (plays[1].about.inning < plays[plays.length -1].about.inning) {
     plays = [plays[0], ...plays.slice(1).reverse()]
   }
-  return (
+  return <>{
     plays.map((play, index) => {
       balls = play.count.balls
       strikes = play.count.strikes
       outs = play.count.outs
 
-      let interval;
+      let interval: ReturnType<typeof setInterval>;
 
       let collapseListener = () => {
         let content = document.getElementById(`pitches_${index}`)
-        if (content.style.maxHeight) {
+        if (content!.style.maxHeight) {
           if (interval) {
             clearInterval(interval)
           }
-          content.style.maxHeight = null;
+          content!.style.maxHeight = "";
         } else {
-          interval = setInterval(() => content.style.maxHeight = content.scrollHeight + "px", 100);
+          interval = setInterval(() => content!.style.maxHeight = content!.scrollHeight + "px", 100);
         }
       }
       return (
@@ -82,7 +83,7 @@ export default function Plays({ game, setTimestamp }) {
             </svg>
           </div>
           <div>
-            {play === game.currentPlay && (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="78.03606468133466 83.53300942673016 496.3416517857596 366.3416517857596" width="50" height="50">
+            {play === gamePlayByPlay.currentPlay && (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="78.03606468133466 83.53300942673016 496.3416517857596 366.3416517857596" width="50" height="50">
               <defs>
                 <path d="M325.21 84.53L441.38 200.7L325.21 316.87L209.04 200.7L325.21 84.53Z" id="b2YCI6YlRZ"></path>
                 <path d="M195.21 214.53L311.38 330.7L195.21 446.87L79.04 330.7L195.21 214.53Z" id="avI05k38w"></path>
@@ -103,7 +104,7 @@ export default function Plays({ game, setTimestamp }) {
           </div>
         </div>
         <div id={`pitches_${index}`} className={styles.pitches}>
-          {play.playEvents ? play.playEvents.map((pitch, idx) => {
+          {play.playEvents ? play.playEvents.map((pitch: AllPlayPlayEvent, idx: number) => {
             return (
               <div key={`pitch_${idx}`}>
                 <p>{pitch.details.description}</p>
@@ -112,9 +113,9 @@ export default function Plays({ game, setTimestamp }) {
             )
           }) : null}
         </div>
-        {play === plays.currentPlay && collapseListener()}
+        {play === plays[0] && collapseListener()}
         </div>
       )
     })
-  )
+  }</>
 }

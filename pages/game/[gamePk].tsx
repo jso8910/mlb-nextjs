@@ -4,8 +4,9 @@ import Plays from '../../components/plays';
 import styles from '../../styles/Home.module.scss'
 import Head from 'next/head';
 import Boxscore from '../../components/boxscore';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
-export default function GamePage ({ params }) {
+export default function GamePage ({ params }: { params: { gamePk: number } }) {
   const { gamePk } = params
   const { data, error } = useSWR([gamePk], getPlayByPlay, { refreshInterval: 100 })
   let dataElement;
@@ -51,12 +52,12 @@ export default function GamePage ({ params }) {
   )
 }
 
-export function getServerSideProps(context) {
+export function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {params: context.params}
   };
 }
-async function getPlayByPlay(gamePk, timecode=null) {
+async function getPlayByPlay(gamePk: string, timecode=null) {
   let params;
   if (timecode) {
     params = { timecode: timecode }

@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.scss'
+import FeedInterface, { Batting } from '../interfaces/feed';
 
-export default function Boxscore({ game }) {
+export default function Boxscore({ game }: { game: FeedInterface }) {
   let boxscore = game.liveData.boxscore;
   let linescore = game.liveData.linescore
   return (
@@ -81,12 +82,12 @@ export default function Boxscore({ game }) {
         </tbody>
       </table>
 
-      {["away", "home"].map(team => {
+      {[boxscore.teams.away, boxscore.teams.home].map(team => {
         return (
-          <table className={styles.awayBoxscore} border='1' frame='hsides' rules='rows'>
+          <table className={styles.awayBoxscore}>
         <thead>
           <tr>
-            <th className={styles.nameBoxscore}>{boxscore.teams[team].team.name}</th>
+            <th className={styles.nameBoxscore}>{team.team.name}</th>
             <th className={styles.centerPaddingTable}>AB</th>
             <th className={styles.centerPaddingTable}>R</th>
             <th className={styles.centerPaddingTable}>H</th>
@@ -99,30 +100,30 @@ export default function Boxscore({ game }) {
           </tr>
         </thead>
         <tbody>
-          {boxscore.teams[team].batters.sort((a, b) => {
-            let playerA = boxscore.teams[team].players[`ID${a}`]
-            let playerB = boxscore.teams[team].players[`ID${b}`]
+          {team.batters.sort((a: number, b: number) => {
+            let playerA = team.players[`ID${a}`]
+            let playerB = team.players[`ID${b}`]
 
-            if (playerA.battingOrder < playerB.battingOrder) {
+            if (playerA.battingOrder! < playerB.battingOrder!) {
               return -1
-            } else if (playerA.battingOrder > playerB.battingOrder) {
+            } else if (playerA.battingOrder! > playerB.battingOrder!) {
               return 1
             } else {
               return 0
             }
-          }).map(playerId => {
-            playerId = `ID${playerId}`
-            let player = boxscore.teams[team].players[playerId]
+          }).map((id: number) => {
+            let playerId = `ID${id}`
+            let player = team.players[playerId]
             return (
               <tr>
                 <td className={styles.nameBoxscore} style={{textIndent: player.gameStatus.isSubstitute ? '20px' : '0px'}}>{player.gameStatus.isSubstitute ? '' : String(player.battingOrder).charAt(0)} {player.person.fullName}, {player.position.abbreviation}</td>
-                <td className={styles.centerPaddingTable}>{player.stats.batting.atBats}</td>
-                <td className={styles.centerPaddingTable}>{player.stats.batting.runs}</td>
-                <td className={styles.centerPaddingTable}>{player.stats.batting.hits}</td>
-                <td className={styles.centerPaddingTable}>{player.stats.batting.rbi}</td>
-                <td className={styles.centerPaddingTable}>{player.stats.batting.baseOnBalls}</td>
-                <td className={styles.centerPaddingTable}>{player.stats.batting.strikeOuts}</td>
-                <td className={styles.centerPaddingTable}>{player.stats.batting.leftOnBase}</td>
+                <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).atBats}</td>
+                <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).runs}</td>
+                <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).hits}</td>
+                <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).rbi}</td>
+                <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).baseOnBalls}</td>
+                <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).strikeOuts}</td>
+                <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).leftOnBase}</td>
                 <td className={styles.centerPaddingTable}>{player.seasonStats.batting.avg}</td>
                 <td className={styles.centerPaddingTable}>{player.seasonStats.batting.ops}</td>
               </tr>
@@ -130,13 +131,13 @@ export default function Boxscore({ game }) {
           })}
           <tr>
             <td className={styles.nameBoxscore}>TOTALS</td>
-            <td className={styles.centerPaddingTable}>{boxscore.teams[team].teamStats.batting.atBats}</td>
-            <td className={styles.centerPaddingTable}>{boxscore.teams[team].teamStats.batting.runs}</td>
-            <td className={styles.centerPaddingTable}>{boxscore.teams[team].teamStats.batting.hits}</td>
-            <td className={styles.centerPaddingTable}>{boxscore.teams[team].teamStats.batting.rbi}</td>
-            <td className={styles.centerPaddingTable}>{boxscore.teams[team].teamStats.batting.baseOnBalls}</td>
-            <td className={styles.centerPaddingTable}>{boxscore.teams[team].teamStats.batting.strikeOuts}</td>
-            <td className={styles.centerPaddingTable}>{boxscore.teams[team].teamStats.batting.leftOnBase}</td>
+            <td className={styles.centerPaddingTable}>{team.teamStats.batting.atBats}</td>
+            <td className={styles.centerPaddingTable}>{team.teamStats.batting.runs}</td>
+            <td className={styles.centerPaddingTable}>{team.teamStats.batting.hits}</td>
+            <td className={styles.centerPaddingTable}>{team.teamStats.batting.rbi}</td>
+            <td className={styles.centerPaddingTable}>{team.teamStats.batting.baseOnBalls}</td>
+            <td className={styles.centerPaddingTable}>{team.teamStats.batting.strikeOuts}</td>
+            <td className={styles.centerPaddingTable}>{team.teamStats.batting.leftOnBase}</td>
           </tr>
         </tbody>
       </table>

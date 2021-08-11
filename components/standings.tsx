@@ -1,11 +1,13 @@
 import styles from '../styles/Home.module.scss'
+import StandingsInterface, { Record } from '../interfaces/standings';
+import League from '../interfaces/league';
+import Division from '../interfaces/division';
 
-export default function Standings({ standings, leagues, divisions }) {
+export default function Standings({ standings, leagues, divisions }: {standings: Array<StandingsInterface>, leagues: Array<League>, divisions: Array<Array<Division>>}) {
   return (
     <div>
     {
-      standings.map(function(e, i) {
-        console.log(e)
+      standings.map((e: any, i: number) => {
         return [e, leagues[i], divisions[i]];
       }).map(league => {
         return ( 
@@ -13,10 +15,10 @@ export default function Standings({ standings, leagues, divisions }) {
           <h2>
             {league[1].leagues[0].name}
           </h2>
-          {league[0].records.map((division, i) => {
+          {league[0].records.map((division: Record, i: number) => {
             return (
               <div className={styles.division}>
-                <table border="1" frame="void" rules="rows">
+                <table>
                   <thead>
                     <tr>
                       <th className={styles.centerPaddingTable}>{league[2][i].divisions[0].nameShort}</th>

@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import GameSmall from '../components/game_small'
 import styles from '../styles/Home.module.scss'
-import getEndpoint from '../lib/endpoints.js'
+import getEndpoint from '../lib/endpoints'
 import useSWR from 'swr'
+import Feed from '../interfaces/feed'
+import Schedule from '../interfaces/schedule'
 
 export default function Home() {
   const { data, error } = useSWR('test', getData, { refreshInterval: 1 })
@@ -36,15 +38,13 @@ export default function Home() {
   )
 }
 
-async function getData() {
-  let data;
-  await fetch(getEndpoint('schedule') + new URLSearchParams({ sportId: 1 })).then(
+async function getData(): Promise<Array<Feed>> {
+  let data: Schedule;
+  data = await fetch(getEndpoint('schedule', {}) + new URLSearchParams({ sportId: '1' })).then(
     res => res.json()
-  ).then(
-    json => data = json
   )
 
-  let todayGamePks = []
+  let todayGamePks: Array<number> = []
   data.dates[0].games.forEach(game => {
     todayGamePks.push(game.gamePk)
   })
@@ -54,23 +54,31 @@ async function getData() {
   )
 
   return games.sort((a, b) => {
-    switch ((a.gameData.status.statusCode, b.gameData.status.statusCode)) {
-      case ('F', 'S'):
+    switch ([a.gameData.status.statusCode, b.gameData.status.statusCode]) {
+      case ['F', 'S']: {
         return 1
-      case ('S', 'F'):
+      }
+      case ['S', 'F']: {
         return -1
-      case ('F', 'PW'):
+      }
+      case ['F', 'PW']: {
         return 1
-      case ('PW', 'F'):
+      }
+      case ['PW', 'F']: {
         return -1
-      case ('P', 'F'):
+      }
+      case ['P', 'F']: {
         return -1
-      case ('F', 'P'):
+      }
+      case ['F', 'P']: {
         return 1
-      case ('S', 'P'):
+      }
+      case ['S', 'P']: {
         return -1
-      case ('P', 'S'):
+      }
+      case ['P', 'S']: {
         return 1
+      }
     }
     return 0
   })

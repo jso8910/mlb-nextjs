@@ -1,8 +1,9 @@
 import styles from '../styles/Home.module.scss'
-import getEndpoint from '../lib/endpoints.js'
+import getEndpoint from '../lib/endpoints'
 import Link from 'next/link'
+import FeedInterface from '../interfaces/feed'
 
-export default function GameSmall({ game }) {
+export default function GameSmall({ game }: { game: FeedInterface }) {
   let runnerDict = game.liveData.linescore.offense
   let runners = []
   for (const base of ["first", "second", "third"]) {

@@ -7,7 +7,7 @@ const V1 = "v1";
 // Refer to https://github.com/toddrob99/MLB-StatsAPI/blob/master/statsapi/endpoints.py for params
 
 
-export default function getEndpoint(endpoint, pathParams) {
+export default function getEndpoint(endpoint: string, pathParams: { teamId?: any; gamePk?: any; leagueId?: any; width?: any; playerId?: any; }) {
   switch (endpoint) {
     case 'schedule':
       return `${BASE_URL}${V1}/schedule?`;
@@ -38,4 +38,6 @@ export default function getEndpoint(endpoint, pathParams) {
       if (!('leagueId' in pathParams)) throw new Error('Missing key leagueId')
       else return `${BASE_URL}${V1}/league/${pathParams.leagueId}?`
   }
+
+  throw new Error('Invalid endpoint')
 }
