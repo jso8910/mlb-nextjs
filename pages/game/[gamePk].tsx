@@ -9,7 +9,7 @@ import Navigation from '../../components/navbar';
 
 export default function GamePage ({ params }: { params: { gamePk: number } }) {
   const { gamePk } = params
-  const { data, error } = useSWR([gamePk], getPlayByPlay, { refreshInterval: 100 })
+  const { data, error } = useSWR([gamePk], getPlayByPlay, { refreshInterval: 5000 })
   let dataElement;
   let title;
 
@@ -21,7 +21,7 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
     title = 'Live MLB Game'
     dataElement = <div className={styles.loader}><div></div><div></div><div></div><div></div></div>
   } else if (data) {
-    title = `${data[1].gameData.teams.away.name} at ${data[1].gameData.teams.home.name} — Live MLB Game`
+    title = `${data[1].gameData.teams.away.name} at ${data[1].gameData.teams.home.name} — Live Baseball Game`
     const playByPlayOnClick = () => {
       (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'block';
       // (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[1].style.display = 'none';

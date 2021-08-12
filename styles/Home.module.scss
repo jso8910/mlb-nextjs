@@ -62,6 +62,7 @@
   flex: auto;
   overflow-x: auto;
   padding: 5px;
+  margin-bottom: 15px;
 }
 
 .score > tr > td {
@@ -289,6 +290,8 @@
 }
 
 .league {
+  width: 25%;
   padding-left: 10px;
   display: inline-block;
+  margin-bottom: 50px;
 }

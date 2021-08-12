@@ -4,11 +4,12 @@ import League from '../interfaces/league';
 import Division from '../interfaces/division';
 
 export default function Standings({ standings, leagues, divisions }: {standings: Array<StandingsInterface>, leagues: Array<League>, divisions: Array<Array<Division>>}) {
+  standings = standings.filter(standing => standing.records[0])
   return (
     <div>
     {
       standings.map((e: any, i: number) => {
-        return [e, leagues[i], divisions[i]];
+      return [e, leagues[i], divisions[i]];
       }).map(league => {
         return ( 
         <div className={styles.league}>
@@ -21,7 +22,7 @@ export default function Standings({ standings, leagues, divisions }: {standings:
                 <table>
                   <thead>
                     <tr>
-                      <th className={styles.centerPaddingTable}>{league[2][i].divisions[0].nameShort}</th>
+                      <th className={styles.centerPaddingTable}>{league[2][i].divisions ? league[2][i].divisions[0].nameShort : league[2][i].leagues[0].nameShort}</th>
                       <th className={styles.centerPaddingTable}>W</th>
                       <th className={styles.centerPaddingTable}>L</th>
                       <th className={styles.centerPaddingTable}>PCT</th>

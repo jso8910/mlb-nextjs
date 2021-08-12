@@ -19,9 +19,10 @@ export default function GameSmall({ game }: { game: FeedInterface }) {
   
   // If the game is currently ongoing then have current game stuff
   let statusCode = game.gameData.status.statusCode.toLowerCase()
-  let gameInProgress = statusCode !== 'f' && statusCode !== 's' && statusCode !== 'p'
+  let gameInProgress = statusCode !== 'f' && statusCode !== 's' && statusCode !== 'p' && statusCode !== 'fr' && statusCode !== 'co'
   let gameOver = statusCode === 'f'
   if (gameInProgress) {
+    console.log(statusCode, game.gameData.status)
     gameInfo = (
       <div>
         <p>Current inning: {game.liveData.linescore.inningHalf} {game.liveData.linescore.currentInningOrdinal}</p>
