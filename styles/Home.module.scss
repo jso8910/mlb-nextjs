@@ -24,6 +24,7 @@
 }
 
 .cardLight {
+  width: calc(100% - $padding * 2);
   background: $cardLight;
   padding: $padding;
   margin: $margin;
@@ -171,9 +172,8 @@
     width: calc(100vw - 40px);
   }
   .scores {
-    min-width: 400px;
-    width: 100vw;
-    max-width: calc(100vw - 30px);
+    min-width: 0px;
+    width: calc(100vw - 40px);
     display: none;
     height: calc(100vh - 110px);
   }
@@ -204,7 +204,7 @@
     background: $card;
     cursor: pointer;
   }
-  .changeButton:active {
+  .changeButton:hover {
     background: lighten($card, 10%);
   }
 
@@ -212,7 +212,7 @@
     background: #555555;
   }
 
-  .buttonActive:active {
+  .buttonActive:hover {
     background: lighten(#555555, 10%);
   }
 }

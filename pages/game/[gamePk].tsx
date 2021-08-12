@@ -4,7 +4,7 @@ import Plays from '../../components/plays';
 import styles from '../../styles/Home.module.scss'
 import Head from 'next/head';
 import Boxscore from '../../components/boxscore';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 
 export default function GamePage ({ params }: { params: { gamePk: number } }) {
   const { gamePk } = params
@@ -23,6 +23,7 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
     title = `${data[1].gameData.teams.away.name} at ${data[1].gameData.teams.home.name} — Live MLB Game`
     const playByPlayOnClick = () => {
       (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'block';
+      // (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[1].style.display = 'none';
       (document.getElementsByClassName(styles.scores) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'none';
       document.getElementById('playByPlayBTN')?.classList.add(styles.buttonActive);
       document.getElementById('boxscoreBTN')?.classList.remove(styles.buttonActive);
@@ -30,6 +31,7 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
 
     const boxScoreOnClick = () => {
       (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'none';
+      // (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[1].style.display = 'block';
       (document.getElementsByClassName(styles.scores) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'block';
       document.getElementById('playByPlayBTN')?.classList.remove(styles.buttonActive);
       document.getElementById('boxscoreBTN')?.classList.add(styles.buttonActive);
