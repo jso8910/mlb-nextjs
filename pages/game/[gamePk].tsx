@@ -5,7 +5,6 @@ import styles from '../../styles/Home.module.scss'
 import Head from 'next/head';
 import Boxscore from '../../components/boxscore';
 import { GetServerSidePropsContext } from 'next';
-import Navigation from '../../components/navbar';
 
 export default function GamePage ({ params }: { params: { gamePk: number } }) {
   const { gamePk } = params

@@ -167,7 +167,17 @@
   right: 0;
 }
 
+.league {
+  width: 25%;
+  padding-left: 10px;
+  display: inline-block;
+  margin-bottom: 50px;
+}
+
 @media (max-width: 1000px) {
+  .league {
+    width: 100%;
+  }
   .playByPlayPlays {
     height: calc(100vh - 144px);
     width: calc(100vw - 40px);
@@ -287,11 +297,4 @@
 .division {
   padding: 5px;
   padding-right: 0px;
-}
-
-.league {
-  width: 25%;
-  padding-left: 10px;
-  display: inline-block;
-  margin-bottom: 50px;
 }
