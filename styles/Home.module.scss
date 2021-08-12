@@ -50,6 +50,10 @@
   transition: max-height 0.2s ease-out;
 }
 
+.currentPitch {
+  transition: 0.2s ease-out;
+}
+
 .games {
   display: flex;
   flex-flow: row;
@@ -126,7 +130,7 @@
   height: calc(100vh - 40px);
   margin: 10px;
   width: 20vw;
-  min-width: 300px;;
+  min-width: 300px;
   overflow-y: auto;
 }
 
@@ -161,10 +165,76 @@
   right: 0;
 }
 
-.liveGameContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+@media (max-width: 1000px) {
+  .playByPlayPlays {
+    height: calc(100vh - 110px);
+    width: calc(100vw - 40px);
+  }
+  .scores {
+    min-width: 400px;
+    width: 100vw;
+    max-width: calc(100vw - 30px);
+    display: none;
+    height: calc(100vh - 110px);
+  }
+
+  .inGameScores {
+    width: calc(100% - 60px);
+  }
+
+  .awayBoxscore {
+    border: 1px solid white;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    overflow-x: scroll;
+    display: block;
+  }
+
+  .centerButtons {
+    text-align: center;
+    padding: 5px;
+  }
+
+  .changeButton {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    background: $card;
+    cursor: pointer;
+  }
+  .changeButton:active {
+    background: lighten($card, 10%);
+  }
+
+  .buttonActive {
+    background: #555555;
+  }
+
+  .buttonActive:active {
+    background: lighten(#555555, 10%);
+  }
+}
+
+
+@media (min-width: 1000px) {
+  .liveGameContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .centerButtons {
+    display: none;
+  }
+  
+  .scores {
+    display: block !important;
+  }
+  .playByPlayPlays {
+    display: block !important;
+  }
 }
 
 .tableInlineBlock {
@@ -195,6 +265,7 @@
   margin-bottom: 20px;
   padding: 5px;
   border-radius: 10px;
+  overflow-x: scroll;
 }
 
 .nameBoxscore {

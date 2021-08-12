@@ -116,7 +116,7 @@ export default function Boxscore({ game }: { game: FeedInterface }) {
             let player = team.players[playerId]
             return (
               <tr>
-                <td className={styles.nameBoxscore} style={{textIndent: player.gameStatus.isSubstitute ? '20px' : '0px'}}>{player.gameStatus.isSubstitute ? '' : String(player.battingOrder).charAt(0)} {player.person.fullName}, {player.position.abbreviation}</td>
+                <td className={styles.nameBoxscore} style={{textIndent: player.gameStatus.isSubstitute ? '20px' : '0px'}}>{player.gameStatus.isSubstitute ? '' : (player.battingOrder?.charAt(0) || '')} {player.person.fullName}, {player.position.abbreviation}</td>
                 <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).atBats}</td>
                 <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).runs}</td>
                 <td className={styles.centerPaddingTable}>{(player.stats.batting as Batting).hits}</td>

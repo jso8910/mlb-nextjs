@@ -11,6 +11,7 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
   const { data, error } = useSWR([gamePk], getPlayByPlay, { refreshInterval: 100 })
   let dataElement;
   let title;
+
   if (error) {
     title = 'Live MLB Game'
     console.log(error)
@@ -20,9 +21,26 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
     dataElement = <div className={styles.loader}><div></div><div></div><div></div><div></div></div>
   } else if (data) {
     title = `${data[1].gameData.teams.away.name} at ${data[1].gameData.teams.home.name} — Live MLB Game`
+    const playByPlayOnClick = () => {
+      (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'block';
+      (document.getElementsByClassName(styles.scores) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'none';
+      document.getElementById('playByPlayBTN')?.classList.add(styles.buttonActive);
+      document.getElementById('boxscoreBTN')?.classList.remove(styles.buttonActive);
+    }
+
+    const boxScoreOnClick = () => {
+      (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'none';
+      (document.getElementsByClassName(styles.scores) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'block';
+      document.getElementById('playByPlayBTN')?.classList.remove(styles.buttonActive);
+      document.getElementById('boxscoreBTN')?.classList.add(styles.buttonActive);
+    }
     dataElement = (
       <div className={styles.liveGameContainer}>
         {data[1].liveData.plays.currentPlay ? (<>
+        <div className={styles.centerButtons}>
+          <div id="playByPlayBTN" onClick={playByPlayOnClick} className={`${styles.changeButton} ${styles.buttonActive}`}>Plays</div>
+          <div id="boxscoreBTN" onClick={boxScoreOnClick} className={styles.changeButton}>Boxscore</div>
+        </div>
         <div className={styles.playByPlayPlays}>
           <Plays game={data[1]} />
         </div>

@@ -6,8 +6,8 @@ function convertDateStringToTimestamp(date: string) {
 }
 
 export default function Plays({ game }: { game: FeedInterface }) {
-  const toOrdinalSuffix = (num: string) => {
-    const int = parseInt(num),
+  const toOrdinalSuffix = (num: number) => {
+    const int = num,
       digits = [int % 10, int % 100],
       ordinals = ['st', 'nd', 'rd', 'th'],
       oPattern = [1, 2, 3, 4],
@@ -19,18 +19,18 @@ export default function Plays({ game }: { game: FeedInterface }) {
   let gameOld = game;
   let gamePlayByPlay = game.liveData.plays
   let balls: number, strikes: number, outs: number;
-  let plays: Array<any> = [gamePlayByPlay.currentPlay];
-  plays.push(...gamePlayByPlay.allPlays)
+  let plays = gamePlayByPlay.allPlays
+
+  if (plays[0].about.inning < plays[plays.length -1].about.inning) {
+    plays = plays.reverse()
+  }
+
   let runnerDict = gameOld.liveData.linescore.offense
   let runners: Array<String> = []
   for (const base of ["first", "second", "third"]) {
     if (base in runnerDict) {
       runners.push(base)
     }
-  }
-
-  if (plays[1].about.inning < plays[plays.length -1].about.inning) {
-    plays = [plays[0], ...plays.slice(1).reverse()]
   }
   return <>{
     plays.map((play, index) => {
@@ -42,13 +42,14 @@ export default function Plays({ game }: { game: FeedInterface }) {
 
       let collapseListener = () => {
         let content = document.getElementById(`pitches_${index}`)
-        if (content!.style.maxHeight) {
-          if (interval) {
-            clearInterval(interval)
-          }
-          content!.style.maxHeight = "";
+        console.log(content?.style.maxHeight)
+        if (content?.style.maxHeight && content?.style.maxHeight !== "0px") {
+          clearInterval(localStorage.getItem(`pitches_${index}_interval`) as unknown as ReturnType<typeof setInterval>)
+          content!.style.maxHeight = "0px";
         } else {
-          interval = setInterval(() => content!.style.maxHeight = content!.scrollHeight + "px", 100);
+          interval = setInterval(() => (content) && (content.style.maxHeight = content.scrollHeight + "px"), 100);
+          localStorage.setItem(`pitches_${index}_interval`, `${interval}`)
+          console.log(interval)
         }
       }
       return (
@@ -103,7 +104,7 @@ export default function Plays({ game }: { game: FeedInterface }) {
             </svg>)}
           </div>
         </div>
-        <div id={`pitches_${index}`} className={styles.pitches}>
+        <div id={play === plays[0] ? `pitches_${index}_nohide` : `pitches_${index}`} className={play !== plays[0] ? styles.pitches : styles.currentPitch}>
           {play.playEvents ? play.playEvents.map((pitch: AllPlayPlayEvent, idx: number) => {
             return (
               <div key={`pitch_${idx}`}>
@@ -113,7 +114,6 @@ export default function Plays({ game }: { game: FeedInterface }) {
             )
           }) : null}
         </div>
-        {play === plays[0] && collapseListener()}
         </div>
       )
     })
