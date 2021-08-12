@@ -25,3 +25,12 @@ table tr {
 table tr:last-child {
   border: 0;
 }
+
+.navbar {
+  padding: $padding;
+  margin-bottom: 10px;
+}
+
+.navbar.navbar-dark.bg-dark {
+  background: $card !important;
+}
