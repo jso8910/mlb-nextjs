@@ -172,6 +172,7 @@
   padding-left: 10px;
   display: inline-block;
   margin-bottom: 50px;
+  vertical-align: top;
 }
 
 @media (max-width: 1000px) {
@@ -297,4 +298,8 @@
 .division {
   padding: 5px;
   padding-right: 0px;
+  > table {
+    display: block;
+    overflow-x: scroll;
+  }
 }

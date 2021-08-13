@@ -50,6 +50,7 @@ export default function Standings({ standings, leagues, divisions }: {standings:
               </div>
             )
           })}
+          <hr />
         </div>
         )
       })

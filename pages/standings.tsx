@@ -15,7 +15,7 @@ import { LeagueRecordElement } from '../interfaces/standings';
 const leagueIds = [104, 103, 117, 112, 111, 113, 109, 118, 116, 126, 110, 122, 123]
 
 export default function Standing() {
-  const { data, error } = useSWR('test', getStandings, { refreshInterval: 1 })
+  const { data, error } = useSWR('test', getStandings, { refreshInterval: 1000 * 60 })
   let dataElement;
   if (error) {
     console.log(error)
