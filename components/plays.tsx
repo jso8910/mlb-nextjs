@@ -53,7 +53,7 @@ export default function Plays({ game }: { game: FeedInterface }) {
         }
       }
       return (
-        <div onClick={collapseListener} className={styles.cardLight} key={`play_${index}`}>
+        <div onClick={collapseListener} className={`${styles.cardLight} ${styles.play}`} key={`play_${index}`}>
         <div>
           <p>{play.about.halfInning.charAt(0).toUpperCase() + play.about.halfInning.slice(1)} of {toOrdinalSuffix(play.about.inning)}{play.result.description && ` — ${play.result.description}`}</p>
           <div>

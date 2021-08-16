@@ -44,7 +44,7 @@ export default function Boxscore({ game }: { game: FeedInterface }) {
           {linescore.innings.map(inning => {
               return (
                 <>
-                  <td className={styles.smallPadding}>{inning.away.runs}</td>
+                  <td className={styles.smallPadding}>{(inning.away.runs === undefined && game.gameData.status.codedGameState === 'F') ? 'x' : inning.away.runs }</td>
                 </>
               )
             })}

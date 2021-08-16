@@ -136,6 +136,10 @@
   overflow-y: auto;
 }
 
+.play {
+  width: calc(100% - 40px);
+}
+
 .scores {
   display: inline-flex;
   flex-direction: column;
