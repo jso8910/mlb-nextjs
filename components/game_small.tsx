@@ -19,11 +19,8 @@ export default function GameSmall({ game }: { game: FeedInterface }) {
   
   // If the game is currently ongoing then have current game stuff
   let statusCode = game.gameData.status.statusCode.toLowerCase()
-  let gameInProgress = !['f', 's', 'p', 'fr', 'co', 'dr', 'di'].includes(statusCode)
+  let gameInProgress = !['f', 's', 'p', 'fr', 'co', 'dr', 'di', 'ug'].includes(statusCode)
   let gameOver = statusCode === 'f'
-  if (game.gameData.status.detailedState === "Postponed") {
-    console.log(statusCode)
-  }
   if (gameInProgress) {
     gameInfo = (
       <div>
