@@ -84,7 +84,7 @@ export default function Boxscore({ game }: { game: FeedInterface }) {
 
       {[boxscore.teams.away, boxscore.teams.home].map(team => {
         return (
-          <table className={styles.awayBoxscore}>
+          <table className={styles.awayBoxscore} key={Math.random().toString}>
         <thead>
           <tr>
             <th className={styles.nameBoxscore}>{team.team.name}</th>
