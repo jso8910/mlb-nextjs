@@ -12,7 +12,7 @@ export default function Standings({ standings, leagues, divisions }: {standings:
       return [e, leagues[i], divisions[i]];
       }).map(league => {
         return ( 
-        <div className={styles.league} key={i}>
+        <div className={styles.league} key={Math.random()}>
           <h2>
             {league[1].leagues[0].name}
           </h2>
