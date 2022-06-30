@@ -8,7 +8,7 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-                <Nav.Link href="/">Today's Games</Nav.Link>
+                <Nav.Link href="/">Today&apos;s Games</Nav.Link>
                 <Nav.Link href="/standings">Standings</Nav.Link>
             </Nav>
         </Navbar.Collapse>
