@@ -12,13 +12,13 @@ export default function Standings({ standings, leagues, divisions }: {standings:
       return [e, leagues[i], divisions[i]];
       }).map(league => {
         return ( 
-        <div className={styles.league}>
+        <div className={styles.league} key={i}>
           <h2>
             {league[1].leagues[0].name}
           </h2>
           {league[0].records.map((division: Record, i: number) => {
             return (
-              <div className={styles.division}>
+              <div className={styles.division} key={i}>
                 <table>
                   <thead>
                     <tr>
@@ -34,7 +34,7 @@ export default function Standings({ standings, leagues, divisions }: {standings:
                   <tbody>
                     {division.teamRecords.map(team => {
                       return (
-                        <tr>
+                        <tr key={Math.random()}>
                           <td>{team.team.name}</td>
                           <td className={styles.centerPaddingTable}>{team.leagueRecord.wins}</td>
                           <td className={styles.centerPaddingTable}>{team.leagueRecord.losses}</td>
