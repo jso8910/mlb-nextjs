@@ -2,7 +2,7 @@ import FeedInterface, { CurrentPlayPlayEvent } from "../interfaces/feed";
 import styles from '../styles/Home.module.scss';
 
 export default function StrikeZone({ game, className }: { game: FeedInterface, className: string | undefined }) {
-    let currentPlay = game.liveData.plays.currentPlay.playEvents[0].pitchData !== undefined ? game.liveData.plays.currentPlay : game.liveData.plays.allPlays[0]
+    let currentPlay = game.liveData.plays.currentPlay.playEvents[0]?.pitchData !== undefined ? game.liveData.plays.currentPlay : game.liveData.plays.allPlays[0]
     const FOOT = window.innerWidth > 1100 ? 5.5 : 7                    // Number of vw in a real life foot
     const STRIKEZONE_WIDTH = 17 / 12    // 17 inches in feet
     const BALL_WIDTH = 2.9 / 12         // apprx 2.9 inches +- 0.04
@@ -11,7 +11,7 @@ export default function StrikeZone({ game, className }: { game: FeedInterface, c
     return (
         <div className={`${styles.centerContainer} ${className ? className : ''}`}>
             {/* First, let's form the strike zone */}
-            {currentPlay.playEvents[0] !== undefined ?
+            {currentPlay.playEvents[0]?.pitchData !== undefined ?
             <div>
                 <div 
                 className={styles.grid}
