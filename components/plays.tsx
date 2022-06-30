@@ -58,29 +58,29 @@ export default function Plays({ game }: { game: FeedInterface }) {
           <p>{play.about.halfInning.charAt(0).toUpperCase() + play.about.halfInning.slice(1)} of {toOrdinalSuffix(play.about.inning)}{play.result.description && ` — ${play.result.description}`}</p>
           <div>
             <svg height="22" width="22">
-              <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={balls >= 1 ? 'yellow' : 'transparent'} />
+              <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={balls >= 1 ? 'yellow' : 'transparent'} />
             </svg>
             <svg height="22" width="22">
-              <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={balls >= 2 ? 'yellow' : 'transparent'} />
+              <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={balls >= 2 ? 'yellow' : 'transparent'} />
             </svg>
             <svg height="22" width="22">
-              <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={balls >= 3 ? 'yellow' : 'transparent'} />
-            </svg>
-          </div>
-          <div>
-            <svg height="22" width="22">
-              <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={strikes >= 1 ? 'orange' : 'transparent'} />
-            </svg>
-            <svg height="22" width="22">
-              <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={strikes >= 2 ? 'orange' : 'transparent'} />
+              <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={balls >= 3 ? 'yellow' : 'transparent'} />
             </svg>
           </div>
           <div>
             <svg height="22" width="22">
-              <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={outs >= 1 ? 'red' : 'transparent'} />
+              <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={strikes >= 1 ? 'orange' : 'transparent'} />
             </svg>
             <svg height="22" width="22">
-              <circle cx="11" cy="11" r="10" stroke-width="1" stroke="black" fill={outs >= 2 ? 'red' : 'transparent'} />
+              <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={strikes >= 2 ? 'orange' : 'transparent'} />
+            </svg>
+          </div>
+          <div>
+            <svg height="22" width="22">
+              <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={outs >= 1 ? 'red' : 'transparent'} />
+            </svg>
+            <svg height="22" width="22">
+              <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={outs >= 2 ? 'red' : 'transparent'} />
             </svg>
           </div>
           <div>
