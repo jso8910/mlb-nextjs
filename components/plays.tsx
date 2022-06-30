@@ -56,7 +56,7 @@ export default function Plays({ game }: { game: FeedInterface }) {
       return (
         <div onClick={collapseListener} className={`${styles.cardLight} ${styles.play}`} key={`play_${index}`}>
         <div>
-          <p>{play.about.halfInning.charAt(0).toUpperCase() + play.about.halfInning.slice(1)} of {toOrdinalSuffix(play.about.inning)}{play.result.description && ` — ${play.result.description}`}</p>
+          <p>{play.about.halfInning.charAt(0).toUpperCase() + play.about.halfInning.slice(1)} of {toOrdinalSuffix(play.about.inning)}{play.result.description ? ` — ${play.result.description }` : play.matchup.batter.fullName}</p>
           <div>
             <svg height="22" width="22">
               <circle cx="11" cy="11" r="10" strokeWidth="1" stroke="black" fill={balls >= 1 ? 'yellow' : 'transparent'} />
