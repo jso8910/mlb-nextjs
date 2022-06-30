@@ -5,6 +5,7 @@ import styles from '../../styles/Home.module.scss'
 import Head from 'next/head';
 import Boxscore from '../../components/boxscore';
 import { GetServerSidePropsContext } from 'next';
+import StrikeZone from '../../components/strike_zone';
 
 export default function GamePage ({ params }: { params: { gamePk: number } }) {
   const { gamePk } = params
@@ -32,13 +33,14 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
     const boxScoreOnClick = () => {
       (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'none';
       // (document.getElementsByClassName(styles.playByPlayPlays) as HTMLCollectionOf<HTMLElement>)[1].style.display = 'block';
-      (document.getElementsByClassName(styles.scores) as HTMLCollectionOf<HTMLElement>)[0].style.display = 'block';
+      (document.getElementsByClassName("boxscore") as HTMLCollectionOf<HTMLElement>)[0].style.display = 'block';
       document.getElementById('playByPlayBTN')?.classList.remove(styles.buttonActive);
       document.getElementById('boxscoreBTN')?.classList.add(styles.buttonActive);
     }
     dataElement = (
       <div className={styles.liveGameContainer}>
         {data[1].liveData.plays.currentPlay ? (<>
+        <StrikeZone game={data[1]} className={styles.strikeMobile}/>
         <div className={styles.centerButtons}>
           <div id="playByPlayBTN" onClick={playByPlayOnClick} className={`${styles.changeButton} ${styles.buttonActive}`}>Plays</div>
           <div id="boxscoreBTN" onClick={boxScoreOnClick} className={styles.changeButton}>Boxscore</div>
@@ -46,9 +48,9 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
         <div className={styles.playByPlayPlays}>
           <Plays game={data[1]} />
         </div>
-        <div className={styles.scores}>
-          <Boxscore game={data[1]} />
-        </div></>) : (
+        <StrikeZone game={data[1]} className={styles.strikeMain}/>
+        <Boxscore game={data[1]} />
+        </>) : (
           <div className={styles.scores}>
             <h2>{data[1].gameData.teams.away.name} at {data[1].gameData.teams.home.name}</h2>
             <p>Game Status: {data[1].gameData.status.detailedState}</p>
@@ -61,7 +63,7 @@ export default function GamePage ({ params }: { params: { gamePk: number } }) {
     )
   }
   return (
-    <div>
+    <div className={styles.gameContainer}>
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

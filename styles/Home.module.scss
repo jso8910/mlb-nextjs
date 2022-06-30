@@ -41,9 +41,9 @@
 .inGameScores {
   cursor: default;
 }
-.inGameScores:hover {
-  background: $cardLight
-}
+// .inGameScores:hover {
+//   background: $cardLight
+// }
 
 .pitches {
   max-height: 0;
@@ -128,11 +128,10 @@
   overflow: auto;
   background: $card;
   border-radius: $borderRadius;
-  padding: $padding;
   height: calc(100vh - 90px);
   margin: 10px;
-  width: 20vw;
-  min-width: 300px;
+  width: 15vw;
+  min-width: 230px;
   overflow-y: auto;
 }
 
@@ -149,9 +148,10 @@
   padding: $padding;
   height: calc(100vh - 90px);
   margin: 10px;
-  width: 35vw;
-  min-width: 600px;
+  width: 25vw;
+  min-width: 450px;
   overflow-y: auto;
+  box-shadow: 0px 0px 10px 2px black;
 }
 
 .boxscore {
@@ -179,13 +179,24 @@
   vertical-align: top;
 }
 
-@media (max-width: 1000px) {
+
+@media (max-width: 1100px) {
   .league {
     width: 100%;
   }
   .playByPlayPlays {
     height: calc(100vh - 144px);
     width: calc(100vw - 40px);
+  }
+  
+  .strikeMain {
+    display: none !important;
+  }
+  .gameContainer {
+    overflow-y: 'scroll'; 
+  }
+  .centerContainer {
+    height: 40vh !important;
   }
 
   .scores {
@@ -235,11 +246,20 @@
 }
 
 
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
   .liveGameContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .gameContainer {
+    overflow-y: hidden;
+    height: calc(100vh - 70px);
+  }
+
+  .strikeMobile {
+    display: none !important;
   }
 
   .centerButtons {
@@ -269,6 +289,8 @@
 
 .centerPaddingTable {
   padding: 5px;
+  padding-left: 1px;
+  padding-right: 1px;
   text-align: center;
 }
 
@@ -306,4 +328,32 @@
     display: block;
     overflow-x: scroll;
   }
+}
+
+.grid {
+    // display: flex;                       /* establish flex container */
+    // flex-wrap: wrap;                     /* enable flex items to wrap */
+    // justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: white;
+    grid-gap: 1px;
+}
+.cell {
+    // flex: 1 0 32%;                       /* don't grow, don't shrink, width */
+    // height: 50px;
+    // margin-bottom: 5px;
+    // height: auto;
+    // width: auto;
+    // opacity: 1;
+    // border: 1px solid #ffffff;
+    // background-color: #999;
+}
+
+.centerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }

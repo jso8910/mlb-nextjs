@@ -5,7 +5,7 @@ export default function Boxscore({ game }: { game: FeedInterface }) {
   let boxscore = game.liveData.boxscore;
   let linescore = game.liveData.linescore
   return (
-    <div className={`${styles.cardLight} ${styles.inGameScores}`}>
+    <div className={`${styles.scores} ${styles.inGameScores} boxscore`}>
       <table className={styles.tableInlineBlock}>
         <thead>
           <tr>

@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.scss'
 import FeedInterface, { AllPlayPlayEvent } from '../interfaces/feed';
+// import { BALL_WIDTH, FOOT } from '../lib/strike_zone_constants'
 
 function convertDateStringToTimestamp(date: string) {
   return date.replaceAll('-', '').replaceAll('T', '_').replaceAll(':', '').split('.')[0]
@@ -84,7 +85,7 @@ export default function Plays({ game }: { game: FeedInterface }) {
             </svg>
           </div>
           <div>
-            {play === gamePlayByPlay.currentPlay && (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="78.03606468133466 83.53300942673016 496.3416517857596 366.3416517857596" width="50" height="50">
+            {index === 0 ? (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="78.03606468133466 83.53300942673016 496.3416517857596 366.3416517857596" width="50" height="50">
               <defs>
                 <path d="M325.21 84.53L441.38 200.7L325.21 316.87L209.04 200.7L325.21 84.53Z" id="b2YCI6YlRZ"></path>
                 <path d="M195.21 214.53L311.38 330.7L195.21 446.87L79.04 330.7L195.21 214.53Z" id="avI05k38w"></path>
@@ -101,14 +102,23 @@ export default function Plays({ game }: { game: FeedInterface }) {
                   <use xlinkHref="#cpNV2Weba" opacity="1" fill={runners.includes("first") ? 'yellow' : 'lightgrey'} fillOpacity="1"></use>
                 </g>
               </g>
-            </svg>)}
+            </svg>) : ""}
           </div>
         </div>
         <div id={play === plays[0] ? `pitches_${index}_nohide` : `pitches_${index}`} className={play !== plays[0] ? styles.pitches : styles.currentPitch}>
           {play.playEvents ? play.playEvents.map((pitch: AllPlayPlayEvent, idx: number) => {
             return (
               <div key={`pitch_${idx}`}>
-                <p>{pitch.details.description}</p>
+                <span style={{
+                    textAlign: 'center',
+                    borderRadius: '50%',
+                    backgroundColor: pitch.details.ballColor,
+                    width: "25px",
+                    display: 'inline-block',
+                    height: '25px',
+                    marginRight: '5px'
+                }}>{idx + 1}</span>
+                <span>{pitch.details.description}</span>
                 <hr />
               </div>
             )
