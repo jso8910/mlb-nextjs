@@ -2,6 +2,7 @@ import styles from '../styles/Home.module.scss'
 import getEndpoint from '../lib/endpoints'
 import Link from 'next/link'
 import FeedInterface from '../interfaces/feed'
+import Image from 'next/image
 
 export default function GameSmall({ game }: { game: FeedInterface }) {
   let runnerDict = game.liveData.linescore.offense
@@ -33,13 +34,13 @@ export default function GameSmall({ game }: { game: FeedInterface }) {
           </defs>
           <g>
             <g>
-              <use xlinkHref="#b2YCI6YlRZ" opacity="1" fill={runners.includes("second") ? 'yellow' : 'lightgrey'} fill-opacity="1"></use>
+              <use xlinkHref="#b2YCI6YlRZ" opacity="1" fill={runners.includes("second") ? 'yellow' : 'lightgrey'} fillOpacity="1"></use>
             </g>
             <g>
-              <use xlinkHref="#avI05k38w" opacity="1" fill={runners.includes("third") ? 'yellow' : 'lightgrey'} fill-opacity="1"></use>
+              <use xlinkHref="#avI05k38w" opacity="1" fill={runners.includes("third") ? 'yellow' : 'lightgrey'} fillOpacity="1"></use>
             </g>
             <g>
-              <use xlinkHref="#cpNV2Weba" opacity="1" fill={runners.includes("first") ? 'yellow' : 'lightgrey'} fill-opacity="1"></use>
+              <use xlinkHref="#cpNV2Weba" opacity="1" fill={runners.includes("first") ? 'yellow' : 'lightgrey'} fillOpacity="1"></use>
             </g>
           </g>
         </svg>
@@ -63,7 +64,7 @@ export default function GameSmall({ game }: { game: FeedInterface }) {
         <tr>
           <td className={styles.table}>
             <div className={styles.logocontainer}>
-              <img width="25px" height="25px" src={getEndpoint('logo', {teamId: game.gameData.teams.away.id})}></img>
+              <Image width="25px" height="25px" src={getEndpoint('logo', {teamId: game.gameData.teams.away.id})}></Image>
             </div>
           </td>
           <td className={styles.table}>{game.gameData.teams.away.name}</td>
@@ -74,7 +75,7 @@ export default function GameSmall({ game }: { game: FeedInterface }) {
         <tr>
           <td className={styles.table}>
             <div className={styles.logocontainer}>
-              <img width="25px" height="25px" src={getEndpoint('logo', {teamId: game.gameData.teams.home.id})}></img>
+              <Image width="25px" height="25px" src={getEndpoint('logo', {teamId: game.gameData.teams.home.id})}></Image>
             </div>
           </td>
           <td className={styles.table}>{game.gameData.teams.home.name}</td>
