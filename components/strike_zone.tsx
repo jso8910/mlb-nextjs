@@ -11,7 +11,7 @@ export default function StrikeZone({ game, className }: { game: FeedInterface, c
     return (
         <div className={`${styles.centerContainer} ${className ? className : ''}`}>
             {/* First, let's form the strike zone */}
-            {currentPlay.playEvents[0]?.pitchData !== undefined ?
+            {currentPlay.playEvents[0] !== undefined ?
             <div>
                 <div 
                 className={styles.grid}
