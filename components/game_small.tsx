@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.scss'
 import getEndpoint from '../lib/endpoints'
 import Link from 'next/link'
 import FeedInterface from '../interfaces/feed'
-import Image from 'next/image
+import Image from 'next/image'
 
 export default function GameSmall({ game }: { game: FeedInterface }) {
   let runnerDict = game.liveData.linescore.offense
