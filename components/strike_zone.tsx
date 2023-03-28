@@ -8,6 +8,20 @@ export default function StrikeZone({ game, className }: { game: FeedInterface, c
     const BALL_WIDTH = 2.9 / 12         // apprx 2.9 inches +- 0.04
     let events = currentPlay.playEvents
     const VW_PX = window.innerWidth / 100     // Value of 1vw in pixels
+    // Workaround for when the hotcoldzones don't exist
+    if !(currentPlay.matchup.batterHotColdZones) {
+        currentPlay.matchup.batterHotColdZones = [
+            "#bbbbbb",
+            "#bbbbbb",
+            "#bbbbbb",
+            "#bbbbbb",
+            "#bbbbbb",
+            "#bbbbbb",
+            "#bbbbbb",
+            "#bbbbbb",
+            "#bbbbbb",
+        ]
+    }
     return (
         <div className={`${styles.centerContainer} ${className ? className : ''}`}>
             {/* First, let's form the strike zone */}
