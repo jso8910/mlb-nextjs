@@ -11,15 +11,15 @@ export default function StrikeZone({ game, className }: { game: FeedInterface, c
     // Workaround for when the hotcoldzones don't exist
     if !(currentPlay.matchup.batterHotColdZones) {
         currentPlay.matchup.batterHotColdZones = [
-            "#bbbbbb",
-            "#bbbbbb",
-            "#bbbbbb",
-            "#bbbbbb",
-            "#bbbbbb",
-            "#bbbbbb",
-            "#bbbbbb",
-            "#bbbbbb",
-            "#bbbbbb",
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
+            {color: "#bbbbbb", zone: null, temp: "lukewarm"},
         ]
     }
     return (
