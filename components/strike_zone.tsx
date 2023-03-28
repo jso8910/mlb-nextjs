@@ -9,6 +9,7 @@ export default function StrikeZone({ game, className }: { game: FeedInterface, c
     let events = currentPlay.playEvents
     const VW_PX = window.innerWidth / 100     // Value of 1vw in pixels
     // Workaround for when the hotcoldzones don't exist
+    console.log(currentPlay.matchup.batterHotColdZones)
     if (currentPlay.matchup.batterHotColdZones == []) {
         currentPlay.matchup.batterHotColdZones = [
             {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
