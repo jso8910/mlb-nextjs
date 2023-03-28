@@ -1,4 +1,4 @@
-import FeedInterface, { CurrentPlayPlayEvent, Color } from "../interfaces/feed";
+import FeedInterface, { CurrentPlayPlayEvent, Color, Temp } from "../interfaces/feed";
 import styles from '../styles/Home.module.scss';
 
 export default function StrikeZone({ game, className }: { game: FeedInterface, className: string | undefined }) {
@@ -11,15 +11,15 @@ export default function StrikeZone({ game, className }: { game: FeedInterface, c
     // Workaround for when the hotcoldzones don't exist
     if (currentPlay.matchup.batterHotColdZones == []) {
         currentPlay.matchup.batterHotColdZones = [
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
-            {color: Color.RGBA255255255055, zone: "", temp: "lukewarm", value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
+            {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
         ]
     }
     return (
