@@ -11,6 +11,7 @@ export default function StrikeZone({ game, className }: { game: FeedInterface, c
     // Workaround for when the hotcoldzones don't exist
     console.log(currentPlay.matchup.batterHotColdZones)
     if (currentPlay.matchup.batterHotColdZones == []) {
+        console.log("here")
         currentPlay.matchup.batterHotColdZones = [
             {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
             {color: Color.RGBA255255255055, zone: "", temp: Temp.Lukewarm, value: ""},
